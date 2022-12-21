@@ -143,8 +143,5 @@ class SimuladorIRPF:
         return round(sum([impostos.get(el) for el in impostos]), 2)
 
     def calcula_aliquota_efetiva(self):
-        if self.total_rendimentos() == 4000.0:
-            return 3.54
-        elif self.total_rendimentos() == 3000.0:
-            return 2.01
+        return round((self.calcula_total_imposto_faixas() / self.total_rendimentos()) * 100, 2)
     
