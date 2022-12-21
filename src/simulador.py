@@ -86,49 +86,58 @@ class SimuladorIRPF:
         return len(self.dependentes)
 
     def calcula_faixas(self):
-        if (self.total_rendimentos() - self.total_deducoes()) == 2500.00:
-            return {
-                "1": 1903.98,
-                "2": 596.02,
-                "3": 0.0,
-                "4": 0.0,
-                "5": 0.0,
-            }
-        elif (self.total_rendimentos() - self.total_deducoes()) == 3500.00:
-            return {
-                "1": 1903.98,
-                "2": 922.67,
-                "3": 673.35,
-                "4": 0.0,
-                "5": 0.0,
-            }
+        total_rendimentos = (
+            self.total_rendimentos() - 
+            self.total_deducoes() - 
+            (189.59 * self.total_dependentes())
+        )
+
+        faixa_1 = faixa_2 = faixa_3 = faixa_4 = faixa_5 = 0
+
+        if total_rendimentos <= 1903.98:
+            faixa_1 = total_rendimentos
+        elif total_rendimentos <= 2826.65:
+            faixa_1 = 1903.98
+            faixa_2 = round(total_rendimentos - 1903.98, 2)
+        elif total_rendimentos <= 3751.05:
+            faixa_1 = 1903.98
+            faixa_2 = 922.67
+            faixa_3 = round(total_rendimentos - 2826.65, 2)
+        elif total_rendimentos <= 4664.68:
+            faixa_1 = 1903.98
+            faixa_2 = 922.67
+            faixa_3 = 924.40
+            faixa_4 = round(total_rendimentos - 3751.05, 2)
+        else:
+            faixa_1 = 1903.98
+            faixa_2 = 922.67
+            faixa_3 = 924.40
+            faixa_4 = 913.63
+            faixa_5 = round(total_rendimentos - 4664.68, 2)
+
+        return {
+            "1": faixa_1,
+            "2": faixa_2,
+            "3": faixa_3,
+            "4": faixa_4,
+            "5": faixa_5
+        }
 
     def calcula_imposto_faixas(self):
-        if (self.total_rendimentos() - self.total_deducoes()) == 2500.00:
-            return {
-                "1": 0.0,
-                "2": 44.7015,
-                "3": 0.0,
-                "4": 0.0,
-                "5": 0.0,
-            }
-        elif (self.total_rendimentos() - self.total_deducoes()) == 3500.00:
-            return {
-                "1": 0.0,
-                "2": 69.2003,
-                "3": 101.0025,
-                "4": 0.0,
-                "5": 0.0,
-            }
+        faixas = self.calcula_faixas()
+
+        return {
+            "1": 0.00,
+            "2": round(faixas.get("2") * 0.075, 2),
+            "3": round(faixas.get("3") * 0.15, 2),
+            "4": round(faixas.get("4") * 0.225, 2),
+            "5": round(faixas.get("5") * 0.275, 2)
+        }
 
     def calcula_total_faixas(self):
-        if (self.total_rendimentos() - self.total_deducoes()) == 2500.00:
-            return 2500.00
-        elif (self.total_rendimentos() - self.total_deducoes()) == 3500.00:
-            return 3500.00
+        faixas = self.calcula_faixas()
+        return round(sum([faixas.get(el) for el in faixas]), 2)
 
     def calcula_total_imposto_faixas(self):
-        if (self.total_rendimentos() - self.total_deducoes()) == 2500.00:
-            return 44.7015
-        elif (self.total_rendimentos() - self.total_deducoes()) == 3500.00:
-            return 1270.2028
+        impostos = self.calcula_imposto_faixas()
+        return round(sum([impostos.get(el) for el in impostos]), 2)
