@@ -7,7 +7,7 @@ from src.models.rendimento import Rendimento
 
 class SimuladorIRPF:
     def __init__(self):
-        self.rendimento = None
+        self.rendimentos = list()
 
     def cadastra_rendimento(self, descricao, valor):
         if not descricao:
@@ -16,11 +16,13 @@ class SimuladorIRPF:
         if not valor:
             raise ValorRendimentoInvalidoException()
 
-        self.rendimento = Rendimento(
+        self.rendimentos.append(Rendimento(
             descricao=descricao,
             valor=valor
-        )
+        ))
 
         
     def total_rendimentos(self):
-        return self.rendimento.valor
+        return sum([
+            rendimento.valor for rendimento in self.rendimentos]
+        )

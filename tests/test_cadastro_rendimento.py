@@ -6,19 +6,43 @@ from src.exceptions import (
     ValorRendimentoInvalidoException
 )
 
-
-def test_cadastra_rendimento():
+@pytest.mark.parametrize(
+    "rendimentos, resultado", 
+    [
+        (
+            [
+                dict(descricao="salario", valor=500.0), 
+                dict(descricao="pensao", valor=100.0)
+            ], 
+            600.0
+        ), 
+        (
+            [
+                dict(descricao="salario", valor=500.0), 
+            ], 
+            500.0
+        ), 
+        (
+            [
+                dict(descricao="salario", valor=500.0), 
+                dict(descricao="pensao", valor=500.0), 
+                dict(descricao="imposto", valor=100.0), 
+            ], 
+            1100.0
+        ), 
+    ]
+)
+def test_cadastra_rendimento(rendimentos, resultado):
     simulador = SimuladorIRPF()
-    simulador.cadastra_rendimento(descricao="salario", valor=1000.00)
 
-    assert simulador.total_rendimentos() == 1000.0
+    for rendimento in rendimentos:
+        print(rendimento)
+        simulador.cadastra_rendimento(
+            descricao=rendimento.get("descricao"),
+            valor=rendimento.get("valor")
+        )
 
-
-def test_cadastra_rendimento_2():
-    simulador = SimuladorIRPF()
-    simulador.cadastra_rendimento(descricao="salario", valor=500.00)
-
-    assert simulador.total_rendimentos() == 500.0
+    assert simulador.total_rendimentos() == resultado
 
 
 def test_cadastra_rendimento_sem_descricao():
