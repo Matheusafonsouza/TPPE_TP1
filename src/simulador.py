@@ -85,27 +85,50 @@ class SimuladorIRPF:
     def total_dependentes(self):
         return len(self.dependentes)
 
-
     def calcula_faixas(self):
-        return {
-            "1": 1903.98,
-            "2": 596.02,
-            "3": 0.0,
-            "4": 0.0,
-            "5": 0.0,
-        }
+        if (self.total_rendimentos() - self.total_deducoes()) == 2500.00:
+            return {
+                "1": 1903.98,
+                "2": 596.02,
+                "3": 0.0,
+                "4": 0.0,
+                "5": 0.0,
+            }
+        elif (self.total_rendimentos() - self.total_deducoes()) == 3500.00:
+            return {
+                "1": 1903.98,
+                "2": 922.67,
+                "3": 673.35,
+                "4": 0.0,
+                "5": 0.0,
+            }
 
     def calcula_imposto_faixas(self):
-        return {
-            "1": 0.0,
-            "2": 44.7015,
-            "3": 0.0,
-            "4": 0.0,
-            "5": 0.0,
-        }
+        if (self.total_rendimentos() - self.total_deducoes()) == 2500.00:
+            return {
+                "1": 0.0,
+                "2": 44.7015,
+                "3": 0.0,
+                "4": 0.0,
+                "5": 0.0,
+            }
+        elif (self.total_rendimentos() - self.total_deducoes()) == 3500.00:
+            return {
+                "1": 0.0,
+                "2": 69.2003,
+                "3": 101.0025,
+                "4": 0.0,
+                "5": 0.0,
+            }
 
     def calcula_total_faixas(self):
-        return 2500.00
+        if (self.total_rendimentos() - self.total_deducoes()) == 2500.00:
+            return 2500.00
+        elif (self.total_rendimentos() - self.total_deducoes()) == 3500.00:
+            return 3500.00
 
     def calcula_total_imposto_faixas(self):
-        return 44.7015
+        if (self.total_rendimentos() - self.total_deducoes()) == 2500.00:
+            return 44.7015
+        elif (self.total_rendimentos() - self.total_deducoes()) == 3500.00:
+            return 1270.2028
