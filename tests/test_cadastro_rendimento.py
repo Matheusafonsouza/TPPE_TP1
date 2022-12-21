@@ -14,6 +14,13 @@ def test_cadastra_rendimento():
     assert simulador.total_rendimentos() == 1000.0
 
 
+def test_cadastra_rendimento_2():
+    simulador = SimuladorIRPF()
+    simulador.cadastra_rendimento(descricao="salario", valor=500.00)
+
+    assert simulador.total_rendimentos() == 500.0
+
+
 def test_cadastra_rendimento_sem_descricao():
     simulador = SimuladorIRPF()
 
