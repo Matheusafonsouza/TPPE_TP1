@@ -36,7 +36,6 @@ def test_cadastra_rendimento(rendimentos, resultado):
     simulador = SimuladorIRPF()
 
     for rendimento in rendimentos:
-        print(rendimento)
         simulador.cadastra_rendimento(
             descricao=rendimento.get("descricao"),
             valor=rendimento.get("valor")
