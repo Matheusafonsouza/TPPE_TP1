@@ -5,11 +5,15 @@ from src.exceptions import (
     NomeEmBrancoException
 )
 from src.models.rendimento import Rendimento
+from src.models.deducao import Deducao
+from src.models.dependente import Dependente
 
 
 class SimuladorIRPF:
     def __init__(self):
         self.rendimentos = list()
+        self.deducao = None
+        self.dependente = None
 
     def cadastra_rendimento(self, descricao, valor):
         if not descricao:
@@ -35,12 +39,10 @@ class SimuladorIRPF:
         if not valor:
             raise ValorDeducaoInvalidoException()
 
-    def cadastra_contribuicao_previdenciaria(self, descricao, valor):
-        if not descricao:
-            raise DescricaoEmBrancoException()
-
-        if not valor:
-            raise ValorDeducaoInvalidoException()
+        self.deducao = Deducao(
+            descricao=descricao,
+            valor=valor
+        )
 
     def cadastra_contribuicao_previdenciaria(self, descricao, valor):
         if not descricao:
@@ -48,6 +50,11 @@ class SimuladorIRPF:
 
         if not valor:
             raise ValorDeducaoInvalidoException()
+
+        self.deducao = Deducao(
+            descricao=descricao,
+            valor=valor
+        )
 
     def cadastra_pensao_alimenticia(self, descricao, valor):
         if not descricao:
@@ -56,12 +63,22 @@ class SimuladorIRPF:
         if not valor:
             raise ValorDeducaoInvalidoException()
 
+        self.deducao = Deducao(
+            descricao=descricao,
+            valor=valor
+        )
+
     def total_deducaos(self):
-        return 1000.0
+        return self.deducao.valor
 
     def cadastra_dependente(self, nome, data_de_nascimento):
         if not nome:
             raise NomeEmBrancoException()
+
+        self.dependente = Dependente(
+            nome=nome,
+            data_de_nascimento=data_de_nascimento
+        )
 
     def total_dependentes(self):
         return 1

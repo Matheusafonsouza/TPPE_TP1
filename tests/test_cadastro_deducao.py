@@ -19,6 +19,17 @@ def test_cadastra_deducao():
     assert simulador.total_deducaos() == 1000.0
 
 
+def test_cadastra_deducao_2():
+    simulador = SimuladorIRPF()
+
+    simulador.cadastra_deducao(
+        descricao="saude",
+        valor=100.0
+    )
+
+    assert simulador.total_deducaos() == 100.0
+
+
 def test_cadastra_deducao_sem_descricao():
     simulador = SimuladorIRPF()
 
@@ -42,6 +53,17 @@ def test_cadastra_contribuicao_previdenciaria():
     )
 
     assert simulador.total_deducaos() == 1000.0
+
+
+def test_cadastra_contribuicao_previdenciaria_2():
+    simulador = SimuladorIRPF()
+
+    simulador.cadastra_contribuicao_previdenciaria(
+        descricao="previdencia privada",
+        valor=100.0
+    )
+
+    assert simulador.total_deducaos() == 100.0
 
 
 def test_cadastra_contribuicao_previdenciaria_sem_descricao():
@@ -69,6 +91,17 @@ def test_cadastra_pensao_alimenticia():
     assert simulador.total_deducaos() == 1000.0
 
 
+def test_cadastra_pensao_alimenticia_2():
+    simulador = SimuladorIRPF()
+
+    simulador.cadastra_pensao_alimenticia(
+        descricao="pensao",
+        valor=100.0
+    )
+
+    assert simulador.total_deducaos() == 100.0
+
+
 def test_cadastra_pensao_alimenticia_sem_descricao():
     simulador = SimuladorIRPF()
 
@@ -88,6 +121,17 @@ def test_cadastra_dependente():
 
     simulador.cadastra_dependente(
         nome="matheus",
+        data_de_nascimento="23/07/2000"
+    )
+
+    assert simulador.total_dependentes() == 1
+
+
+def test_cadastra_dependente_2():
+    simulador = SimuladorIRPF()
+
+    simulador.cadastra_dependente(
+        nome="maia",
         data_de_nascimento="23/07/2000"
     )
 
