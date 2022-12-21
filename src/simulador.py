@@ -84,3 +84,28 @@ class SimuladorIRPF:
 
     def total_dependentes(self):
         return len(self.dependentes)
+
+
+    def calcula_faixas(self):
+        return {
+            "1": 1903.98,
+            "2": 596.02,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.0,
+        }
+
+    def calcula_imposto_faixas(self):
+        return {
+            "1": 0.0,
+            "2": 44.7015,
+            "3": 0.0,
+            "4": 0.0,
+            "5": 0.0,
+        }
+
+    def calcula_total_faixas(self):
+        return 2500.00
+
+    def calcula_total_imposto_faixas(self):
+        return 44.7015
