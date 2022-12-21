@@ -4,3 +4,11 @@ class DescricaoEmBrancoException(Exception):
 
 class ValorRendimentoInvalidoException(Exception):
     pass
+
+
+class ValorDeducaoInvalidoException(Exception):
+    pass
+
+
+class NomeEmBrancoException(Exception):
+    pass
