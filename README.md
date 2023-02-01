@@ -1,4 +1,4 @@
-# Trabalho 1 de TPPE
+# Trabalho 2 de TPPE
 
 ## Alunos
 
