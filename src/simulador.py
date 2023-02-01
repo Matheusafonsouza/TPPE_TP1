@@ -86,14 +86,26 @@ class SimuladorIRPF:
         return len(self.dependentes)
 
     def calcula_faixas(self):
-        total_rendimentos = (
-            self.total_rendimentos() - 
-            self.total_deducoes() - 
-            (189.59 * self.total_dependentes())
-        )
+        total_rendimentos = self.calcula_total_rendimentos()        
 
+        (
+            faixa_1,
+            faixa_2,
+            faixa_3,
+            faixa_4,
+            faixa_5
+        ) = self.calcula_faixas_pelo_total_rendimento(total_rendimentos)
+
+        return {
+            "1": faixa_1,
+            "2": faixa_2,
+            "3": faixa_3,
+            "4": faixa_4,
+            "5": faixa_5
+        }
+
+    def calcula_faixas_pelo_total_rendimento(self, total_rendimentos):
         faixa_1 = faixa_2 = faixa_3 = faixa_4 = faixa_5 = 0
-
         if total_rendimentos <= 1903.98:
             faixa_1 = total_rendimentos
         elif total_rendimentos <= 2826.65:
@@ -114,14 +126,20 @@ class SimuladorIRPF:
             faixa_3 = 924.40
             faixa_4 = 913.63
             faixa_5 = round(total_rendimentos - 4664.68, 2)
+        return (
+            faixa_1,
+            faixa_2,
+            faixa_3,
+            faixa_4,
+            faixa_5
+        )
 
-        return {
-            "1": faixa_1,
-            "2": faixa_2,
-            "3": faixa_3,
-            "4": faixa_4,
-            "5": faixa_5
-        }
+    def calcula_total_rendimentos(self):
+        return (
+            self.total_rendimentos() -
+            self.total_deducoes() -
+            (189.59 * self.total_dependentes())
+        )
 
     def calcula_imposto_faixas(self):
         faixas = self.calcula_faixas()
