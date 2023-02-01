@@ -1,3 +1,14 @@
+FAIXA_1_LIMITE = 1903.98
+FAIXA_2_LIMITE = 2826.65
+FAIXA_2_LIMITE_VALOR = 922.67
+FAIXA_3_LIMITE = 3751.05
+FAIXA_3_LIMITE_VALOR = 924.40
+FAIXA_4_LIMITE = 4664.68
+FAIXA_4_LIMITE_VALOR = 913.63
+FAIXA_5_LIMITE = 2826.65
+VALOR_POR_DEPENDENTE = 189.59
+
+
 class Faixa:
     def __init__(
             self,
@@ -26,30 +37,30 @@ class Faixa:
         }
 
     def calcula_faixas_pelo_total_rendimento(self):
-        if self.total_rendimentos <= 1903.98:
+        if self.total_rendimentos <= FAIXA_1_LIMITE:
             self.faixa_1 = self.total_rendimentos
-        elif self.total_rendimentos <= 2826.65:
-            self.faixa_1 = 1903.98
-            self.faixa_2 = round(self.total_rendimentos - 1903.98, 2)
-        elif self.total_rendimentos <= 3751.05:
-            self.faixa_1 = 1903.98
-            self.faixa_2 = 922.67
-            self.faixa_3 = round(self.total_rendimentos - 2826.65, 2)
-        elif self.total_rendimentos <= 4664.68:
-            self.faixa_1 = 1903.98
-            self.faixa_2 = 922.67
-            self.faixa_3 = 924.40
-            self.faixa_4 = round(self.total_rendimentos - 3751.05, 2)
+        elif self.total_rendimentos <= FAIXA_2_LIMITE:
+            self.faixa_1 = FAIXA_1_LIMITE
+            self.faixa_2 = round(self.total_rendimentos - FAIXA_1_LIMITE, 2)
+        elif self.total_rendimentos <= FAIXA_3_LIMITE:
+            self.faixa_1 = FAIXA_1_LIMITE
+            self.faixa_2 = FAIXA_2_LIMITE_VALOR
+            self.faixa_3 = round(self.total_rendimentos - FAIXA_2_LIMITE, 2)
+        elif self.total_rendimentos <= FAIXA_4_LIMITE:
+            self.faixa_1 = FAIXA_1_LIMITE
+            self.faixa_2 = FAIXA_2_LIMITE_VALOR
+            self.faixa_3 = FAIXA_3_LIMITE_VALOR
+            self.faixa_4 = round(self.total_rendimentos - FAIXA_3_LIMITE, 2)
         else:
-            self.faixa_1 = 1903.98
-            self.faixa_2 = 922.67
-            self.faixa_3 = 924.40
-            self.faixa_4 = 913.63
-            self.faixa_5 = round(self.total_rendimentos - 4664.68, 2)
+            self.faixa_1 = FAIXA_1_LIMITE
+            self.faixa_2 = FAIXA_2_LIMITE_VALOR
+            self.faixa_3 = FAIXA_3_LIMITE_VALOR
+            self.faixa_4 = FAIXA_4_LIMITE_VALOR
+            self.faixa_5 = round(self.total_rendimentos - FAIXA_4_LIMITE, 2)
 
     def calcula_total_rendimentos(self):
         return (
             self.total_rendimentos -
             self.total_deducoes -
-            (189.59 * self.total_dependentes)
+            (VALOR_POR_DEPENDENTE * self.total_dependentes)
         )
