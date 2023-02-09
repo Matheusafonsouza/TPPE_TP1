@@ -4,7 +4,7 @@
 
 ## TP 3
 
-O arquivo de entrega do tp3 pode ser visto no arquivo [TP_3.md](https://github.com/Matheusafonsouza/TPPE_TP2/blob/main/TP_3.md) na pasta raiz do projeto.
+O arquivo de entrega do tp3 pode ser visto no arquivo [TP_3.md](./TP_3.md) na pasta raiz do projeto.
 
 ## Introdução
 
