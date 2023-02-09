@@ -2,6 +2,10 @@
 
 **Disciplina:** Técnicas de Programação em Plataformas Emergentes
 
+## TP 3
+
+O arquivo de entrega do tp3 pode ser visto no arquivo [TP_3.md](https://github.com/Matheusafonsouza/TPPE_TP2/blob/main/TP_3.md) na pasta raiz do projeto.
+
 ## Introdução
 
 A aplicação tem como objetivo simular o cálculo do Imposto de Renda de Pessoa Física (IRPF). Para a construção da aplicação, foi utilizado o Python devido a familiaridade do grupo com a linguagem.
