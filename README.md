@@ -1,4 +1,14 @@
-# Trabalho 2 de TPPE
+# Trabalho 3 de TPPE
+
+**Disciplina:** Técnicas de Programação em Plataformas Emergentes
+
+## Introdução
+
+A aplicação tem como objetivo simular o cálculo do Imposto de Renda de Pessoa Física (IRPF). Para a construção da aplicação, foi utilizado o Python devido a familiaridade do grupo com a linguagem.
+
+# Características
+
+O simulador de IRPF objetiva auxiliar os usuários no cálculo do seu Imposto de Renda de Pessoa Física. Para isso, o usuário pode efetuar o cadastro de seus rendimentos e deduções.
 
 ## Alunos
 
@@ -8,9 +18,11 @@
 - Daniel Barcelos Moreira - 17/0101711
 - Matheus Yan monteiro dos Santos Almeida - 18/0127969
 
-## Como instalar as dependências
+## Requisitos para utilização
 
-É necessário ter o [poetry](https://python-poetry.org/) instalado.
+1. Clonar o projeto para sua máquina
+
+2. É necessário ter o [poetry](https://python-poetry.org/) instalado.
 
 ```bash
 poetry install
@@ -26,4 +38,4 @@ poetry run pytest
 
 ```bash
 poetry run black .
-```
+```                          |
