@@ -20,6 +20,7 @@ Esta característica possui relação com o mau-cheiro comentários, visto que e
 
 Como operação de refatoração para esta característica, o README do projeto foi refatorado para uma melhor explicação sobre o projeto, como pode ser visto nas imagens abaixo:
 
+
 ![Boa Documentação](./assets/documentacao.png)
 
 
