@@ -93,15 +93,19 @@ class SimuladorIRPF:
             total_deducoes=self.total_deducoes()
         ).calcula_faixas()
 
+    def arredonda_faixas(self, indice, multiplicador):
+        faixas = self.calcula_faixas()
+        return round(faixas.get(f"{indice}") * multiplicador, 2)
+
     def calcula_imposto_faixas(self):
         faixas = self.calcula_faixas()
 
         return {
             "1": 0.00,
-            "2": round(faixas.get("2") * 0.075, 2),
-            "3": round(faixas.get("3") * 0.15, 2),
-            "4": round(faixas.get("4") * 0.225, 2),
-            "5": round(faixas.get("5") * 0.275, 2)
+            "2": self.arredonda_faixas(2,0.075),
+            "3": self.arredonda_faixas(3,0.15),
+            "4": self.arredonda_faixas(4,0.225),
+            "5": self.arredonda_faixas(5,0.275)
         }
 
     def calcula_total_faixas(self):
