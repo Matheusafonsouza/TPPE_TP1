@@ -7,6 +7,7 @@ from src.exceptions import (
 from src.models.rendimento import Rendimento
 from src.models.deducao import Deducao
 from src.models.dependente import Dependente
+from src.models.faixa import Faixa
 
 
 class SimuladorIRPF:
@@ -86,52 +87,25 @@ class SimuladorIRPF:
         return len(self.dependentes)
 
     def calcula_faixas(self):
-        total_rendimentos = (
-            self.total_rendimentos() - 
-            self.total_deducoes() - 
-            (189.59 * self.total_dependentes())
-        )
+        return Faixa(
+            total_rendimentos=self.total_rendimentos(),
+            total_dependentes=self.total_dependentes(),
+            total_deducoes=self.total_deducoes()
+        ).calcula_faixas()
 
-        faixa_1 = faixa_2 = faixa_3 = faixa_4 = faixa_5 = 0
-
-        if total_rendimentos <= 1903.98:
-            faixa_1 = total_rendimentos
-        elif total_rendimentos <= 2826.65:
-            faixa_1 = 1903.98
-            faixa_2 = round(total_rendimentos - 1903.98, 2)
-        elif total_rendimentos <= 3751.05:
-            faixa_1 = 1903.98
-            faixa_2 = 922.67
-            faixa_3 = round(total_rendimentos - 2826.65, 2)
-        elif total_rendimentos <= 4664.68:
-            faixa_1 = 1903.98
-            faixa_2 = 922.67
-            faixa_3 = 924.40
-            faixa_4 = round(total_rendimentos - 3751.05, 2)
-        else:
-            faixa_1 = 1903.98
-            faixa_2 = 922.67
-            faixa_3 = 924.40
-            faixa_4 = 913.63
-            faixa_5 = round(total_rendimentos - 4664.68, 2)
-
-        return {
-            "1": faixa_1,
-            "2": faixa_2,
-            "3": faixa_3,
-            "4": faixa_4,
-            "5": faixa_5
-        }
+    def arredonda_faixas(self, indice, multiplicador):
+        faixas = self.calcula_faixas()
+        return round(faixas.get(f"{indice}") * multiplicador, 2)
 
     def calcula_imposto_faixas(self):
         faixas = self.calcula_faixas()
 
         return {
             "1": 0.00,
-            "2": round(faixas.get("2") * 0.075, 2),
-            "3": round(faixas.get("3") * 0.15, 2),
-            "4": round(faixas.get("4") * 0.225, 2),
-            "5": round(faixas.get("5") * 0.275, 2)
+            "2": self.arredonda_faixas(2,0.075),
+            "3": self.arredonda_faixas(3,0.15),
+            "4": self.arredonda_faixas(4,0.225),
+            "5": self.arredonda_faixas(5,0.275)
         }
 
     def calcula_total_faixas(self):
